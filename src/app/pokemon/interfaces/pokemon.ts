@@ -1,11 +1,29 @@
-export interface PokemonResult {
+export interface CompactPokemonDataResult {
   count: number;
   next?: string;
   previous?: string;
-  results: Pokemon[];
+  results: {
+    name: string,
+    url: string
+  }[];
 }
 
-export interface Pokemon {
+export interface PaginationAndPokemonData {
+  pagination: {
+    count: number,
+    next?: string,
+    previous?: string
+  },
+  names: string[]
+}
+
+export interface PaginationData {
+  count: number;
+  next?: string;
+  previous?: string;
+}
+
+export interface FullPokemonDataResult {
   abilities: Ability[];
   base_experience: number;
   forms: Form[];

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PokemonApiService} from "./pokemon/services/pokemon-api.service";
 import {Observable} from "rxjs";
 
-import {Pokemon} from "./pokemon/interfaces/pokemon";
+import {FullPokemonDataResult, PaginationData} from "./pokemon/interfaces/pokemon";
 
 @Component({
   selector: 'app-root',
@@ -10,13 +10,13 @@ import {Pokemon} from "./pokemon/interfaces/pokemon";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'angular-pokemon-api';
-
-  public pokemons: Pokemon[] = [];
+  public pokemons: FullPokemonDataResult[] = [];
+  public paginationData: PaginationData | undefined;
 
   constructor(private pokemonApiService: PokemonApiService) {}
 
   ngOnInit() {
-    this.pokemons = this.pokemonApiService.getPokemonData()
+    this.pokemons = this.pokemonApiService.getPokemonData();
+    this.paginationData = this.pokemonApiService.getPaginationData();
   }
 }
