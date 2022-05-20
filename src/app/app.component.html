@@ -4,9 +4,10 @@
     <h1 class="text-4xl">All Pokémon</h1>
     <div class="mt-12 mb-24 space-y-4">
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+
         <div *ngFor="let pokemon of pokemons" class="border bg-gray-100 p-5">
           <span class="block pb-3">{{ pokemon.name }}</span>
-          <img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ pokemon.id }}.png" alt="">
         </div>
       </div>
 

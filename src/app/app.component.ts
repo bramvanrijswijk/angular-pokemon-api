@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PokemonApiService} from "./pokemon/services/pokemon-api.service";
-import {Observable} from "rxjs";
 
-import {FullPokemonDataResult, PaginationData} from "./pokemon/interfaces/pokemon";
+import {CompactPokemon, Pagination, PokemonApiDataResult} from "./pokemon/interfaces/pokemon";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -10,13 +10,21 @@ import {FullPokemonDataResult, PaginationData} from "./pokemon/interfaces/pokemo
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public pokemons: FullPokemonDataResult[] = [];
-  public paginationData: PaginationData | undefined;
+  public pokemons: CompactPokemon[] = [];
+  public pagination: Pagination = {count: 0};
 
   constructor(private pokemonApiService: PokemonApiService) {}
 
   ngOnInit() {
-    this.pokemons = this.pokemonApiService.getPokemonData();
-    this.paginationData = this.pokemonApiService.getPaginationData();
+    this.pokemonApiService.getPokemonData().subscribe({
+      next: apiResult => {
+        this.pokemons = apiResult.results;
+        this.pagination = {
+          count: apiResult.count,
+          next: apiResult.next,
+          previous: apiResult.previous
+        }
+      }
+    });
   }
 }

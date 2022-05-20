@@ -1,29 +1,20 @@
-export interface CompactPokemonDataResult {
-  count: number;
-  next?: string;
-  previous?: string;
-  results: {
-    name: string,
-    url: string
-  }[];
+export interface PokemonApiDataResult extends Pagination {
+  results: CompactPokemon[];
 }
 
-export interface PaginationAndPokemonData {
-  pagination: {
-    count: number,
-    next?: string,
-    previous?: string
-  },
-  names: string[]
-}
-
-export interface PaginationData {
+export interface Pagination {
   count: number;
   next?: string;
   previous?: string;
 }
 
-export interface FullPokemonDataResult {
+export interface CompactPokemon {
+  name: string;
+  url: string;
+  id?: number;
+}
+
+export interface SinglePokemon {
   abilities: Ability[];
   base_experience: number;
   forms: Form[];
